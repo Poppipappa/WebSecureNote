@@ -8,7 +8,7 @@ const PORT         = process.env.PORT         || 3001;
 const SECRET_TOKEN = process.env.SECRET_TOKEN || '';
 
 app.use(cors({
-  origin: "https://web-secure-note-66011409.vercel.app/"
+  origin: "https://web-secure-note-66011409.vercel.app"
 }));                   
 app.use(express.json());           
 app.use(express.static('../frontend')); 
