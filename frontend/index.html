@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SecureNote</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="app">
+
+  <aside class="sidebar">
+
+    <div class="sidebar-header">
+      <div class="logo">
+        <div class="logo-icon">🔒</div>
+        <h1>SecureNote</h1>
+      </div>
+      <div class="logo-tagline">Authorized Access Only</div>
+    </div>
+
+    <div class="auth-section">
+      <div class="auth-label">Authorization Token</div>
+      <div class="token-row">
+        <input
+          class="token-input"
+          type="password"
+          id="tokenInput"
+          placeholder="Enter SECRET_TOKEN…"
+          oninput="checkToken()"
+        />
+        <div class="token-status" id="tokenStatus"></div>
+      </div>
+    </div>
+
+    <div class="notes-list-header">
+      <span class="notes-count" id="notesCount">0 Notes</span>
+      <button class="btn-new-note" id="newNoteBtn" onclick="showCreateForm()">+ New</button>
+    </div>
+
+    <div class="notes-list" id="notesList">
+      <div class="empty-list">No notes yet.<br/>Create your first one →</div>
+    </div>
+
+  </aside>
+
+  <main class="main">
+
+    <div class="status-bar">
+      <div class="loader" id="loader"></div>
+      <div class="status-msg" id="statusMsg"></div>
+    </div>
+
+    <section class="form-section" id="createSection">
+      <h2 class="form-heading">New Note</h2>
+      <div class="field">
+        <label class="field-label" for="createTitle">Title</label>
+        <input type="text" id="createTitle" placeholder="Note title…" maxlength="120"/>
+      </div>
+      <div class="field">
+        <label class="field-label" for="createContent">Content</label>
+        <textarea id="createContent" placeholder="Write your secure note here…"></textarea>
+      </div>
+      <div class="form-btns">
+        <button class="btn-primary" id="saveBtn" onclick="createNote()">
+          <span class="btn-method">POST</span> Save Note
+        </button>
+        <button class="btn-secondary" onclick="clearCreateForm()">Clear</button>
+      </div>
+    </section>
+
+    <section class="detail-section" id="detailSection">
+      <div class="detail-meta" id="detailMeta"></div>
+      <div class="detail-title" id="detailTitle"></div>
+      <div class="detail-content" id="detailContent"></div>
+      <div class="detail-actions">
+        <button class="btn-primary btn-edit" onclick="showEditForm()">
+          <span class="btn-method">PATCH</span> Edit
+        </button>
+        <button class="btn-primary btn-danger" onclick="deleteNote(activeNoteId)">
+          <span class="btn-method">DELETE</span> Delete
+        </button>
+        <button class="btn-secondary" onclick="closeDetail()">← Back</button>
+      </div>
+    </section>
+
+    <section class="form-section edit-section" id="editSection">
+      <h2 class="form-heading">Edit Note</h2>
+      <div class="field">
+        <label class="field-label" for="editTitle">Title</label>
+        <input type="text" id="editTitle" placeholder="Note title…" maxlength="120"/>
+      </div>
+      <div class="field">
+        <label class="field-label" for="editContent">Content</label>
+        <textarea id="editContent" placeholder="Edit your note…"></textarea>
+      </div>
+      <div class="form-btns">
+        <button class="btn-primary" id="editBtn" onclick="updateNote()">
+          <span class="btn-method">PATCH</span> Save Changes
+        </button>
+        <button class="btn-secondary" onclick="cancelEdit()">Cancel</button>
+      </div>
+    </section>
+
+    <hr class="section-divider"/>
+    <div class="debug-panel">
+      <div class="debug-header">HTTP Request Log</div>
+      <div id="debugLog"><span style="color:#555">Awaiting requests…</span></div>
+    </div>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
