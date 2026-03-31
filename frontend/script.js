@@ -1,4 +1,4 @@
-const API_BASE = 'https://web-secure-note.vercel.app/';
+const API_BASE = 'https://web-secure-note.vercel.app';
 
 let notes = [];
 let activeNoteId = null;
