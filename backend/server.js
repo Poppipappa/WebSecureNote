@@ -7,7 +7,9 @@ const app  = express();
 const PORT         = process.env.PORT         || 3001;
 const SECRET_TOKEN = process.env.SECRET_TOKEN || '';
 
-app.use(cors());                   
+app.use(cors({
+  origin: "*"
+}));                   
 app.use(express.json());           
 app.use(express.static('../frontend')); 
 
